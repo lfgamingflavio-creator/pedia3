@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cabinet de Pédiatrie – Dr. Regusci & Associés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2e45;
+    --navy-light: #243d5c;
+    --sage: #7fa89a;
+    --sage-light: #b8d4cc;
+    --cream: #f7f4ef;
+    --white: #ffffff;
+    --text: #2d3748;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+    --accent: #c8a96e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(247,244,239,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 500;
+    color: var(--navy); text-decoration: none;
+  }
+  .nav-logo .hand-logo { width: 52px; height: 52px; flex-shrink: 0; }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-muted);
+    font-size: 0.875rem; font-weight: 400; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .btn-rdv {
+    background: var(--navy); color: var(--white) !important;
+    padding: 10px 24px; border-radius: 6px; font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: background 0.2s !important;
+  }
+  .btn-rdv:hover { background: var(--navy-light) !important; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+  }
+  .hero-left {
+    background: var(--navy);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 64px;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(127,168,154,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(127,168,154,0.2); border: 1px solid rgba(127,168,154,0.3);
+    color: var(--sage-light); font-size: 0.8rem; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 32px; width: fit-content;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--sage); border-radius: 50%;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.6rem; font-weight: 300;
+    color: var(--white); line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .hero-title em { font-style: italic; color: var(--sage-light); }
+  .hero-desc {
+    color: rgba(255,255,255,0.65); font-size: 1rem;
+    max-width: 420px; margin-bottom: 48px; line-height: 1.75;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: var(--navy);
+    padding: 14px 32px; border-radius: 6px; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 14px 32px; border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 400;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 500; color: var(--white);
+  }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 64px;
+  }
+  .hero-right h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400; color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .hero-right p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 36px; }
+
+  /* FORM */
+  .rdv-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--navy); letter-spacing: 0.02em; }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 12px 16px; border: 1px solid var(--border);
+    border-radius: 6px; background: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--sage); box-shadow: 0 0 0 3px rgba(127,168,154,0.15);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-submit {
+    background: var(--navy); color: var(--white);
+    padding: 14px; border: none; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    margin-top: 4px;
+  }
+  .form-submit:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+  /* SECTION BASE */
+  section { padding: 100px 80px; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sage); font-weight: 500; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 400; color: var(--navy);
+    line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-desc { color: var(--text-muted); max-width: 560px; line-height: 1.8; }
+
+  /* SERVICES */
+  .services { background: var(--white); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 64px; border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .service-card {
+    padding: 40px 36px; background: var(--white);
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+    position: relative;
+  }
+  .service-card:last-child { border-right: none; }
+  .service-card:hover { background: var(--cream); }
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--cream); display: grid; place-items: center;
+    margin-bottom: 24px; font-size: 1.4rem;
+  }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 500; color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .service-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* MÉDECINS */
+  .medecins { background: var(--cream); }
+  .medecins-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px; margin-top: 64px;
+  }
+  .medecin-card {
+    background: var(--white); border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .medecin-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(26,46,69,0.1);
+  }
+  .medecin-photo {
+    height: 220px; background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; position: relative; overflow: hidden;
+  }
+  .medecin-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    opacity: 0.85;
+  }
+  .medecin-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3);
+    display: grid; place-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: var(--white); font-weight: 400;
+    position: relative; z-index: 1;
+  }
+  .medecin-body { padding: 28px; }
+  .medecin-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 500; color: var(--navy); margin-bottom: 4px;
+  }
+  .medecin-spec {
+    font-size: 0.8rem; color: var(--sage); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px;
+  }
+  .medecin-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+  .medecin-dispos { display: flex; gap: 6px; flex-wrap: wrap; }
+  .dispo-tag {
+    font-size: 0.75rem; padding: 4px 10px; border-radius: 100px;
+    background: var(--cream); color: var(--navy); border: 1px solid var(--border);
+  }
+
+  /* INFOS PRATIQUES */
+  .infos { background: var(--navy); }
+  .infos .section-label { color: var(--sage-light); }
+  .infos .section-title { color: var(--white); }
+  .infos .section-desc { color: rgba(255,255,255,0.6); }
+  .infos-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; margin-top: 64px;
+  }
+  .info-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 500; color: var(--white);
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.875rem;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .day { color: rgba(255,255,255,0.6); }
+  .info-row .time { color: var(--white); font-weight: 500; }
+  .info-row .closed { color: var(--sage-light); font-style: italic; }
+  .contact-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .contact-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: rgba(127,168,154,0.2); display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 18px; height: 18px; stroke: var(--sage-light); fill: none; stroke-width: 1.5; }
+  .contact-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+  .contact-value { font-size: 0.9rem; color: var(--white); font-weight: 400; }
+
+  /* URGENCES */
+  .urgence-banner {
+    background: rgba(200,169,110,0.15); border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 10px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    margin-top: 32px;
+  }
+  .urgence-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .urgence-text h4 { color: var(--accent); font-size: 0.875rem; font-weight: 500; margin-bottom: 4px; }
+  .urgence-text p { color: rgba(255,255,255,0.6); font-size: 0.8rem; line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    background: var(--cream); border-top: 1px solid var(--border);
+    padding: 40px 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--navy); font-weight: 400;
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--navy); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 16px;
+    padding: 40px; max-width: 480px; width: 90%;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modal h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400; color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .modal p { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 28px; }
+  .modal-close {
+    float: right; background: none; border: none; cursor: pointer;
+    font-size: 1.5rem; color: var(--text-muted); line-height: 1;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--navy); }
+  .success-msg {
+    display: none; text-align: center; padding: 20px 0;
+  }
+  .success-msg .check {
+    width: 56px; height: 56px; background: var(--sage);
+    border-radius: 50%; display: grid; place-items: center;
+    margin: 0 auto 16px;
+    font-size: 1.5rem; color: white;
+  }
+  .success-msg h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 8px; }
+  .success-msg p { color: var(--text-muted); font-size: 0.875rem; }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <!-- Main : paume vue de face, pouce+index+majeur levés, un mot pédiatrique sur chaque doigt -->
+    <svg class="hand-logo" viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="palmGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#243d5c"/>
+          <stop offset="100%" stop-color="#1a2e45"/>
+        </linearGradient>
+      </defs>
+      <!-- === PAUME === -->
+      <path d="M11 42 C9 40 8 35 9 29 L10 24
+               C10.5 22 12 21.5 13.5 22.5
+               L13.5 16 C13.5 14 15 13 16.5 13 C18 13 19 14 19 16
+               L19 13 C19 11 20.5 10 22 10 C23.5 10 24.5 11 24.5 13
+               L24.5 14 C24.5 12 26 11 27.5 11 C29 11 30 12 30 14
+               L30 28
+               C31 26 32.5 25.5 33.5 26.5 C34.5 27.5 34.5 30 33 32
+               L29.5 38 C27.5 42 25 45 22 46
+               L16.5 46 C13.5 46 12 44.5 11 42 Z"
+            fill="url(#palmGrad)" stroke="none"/>
+      <!-- Séparateurs entre les 3 doigts (traits fins crème) -->
+      <line x1="19" y1="13" x2="19" y2="25" stroke="#f7f4ef" stroke-width="0.7" opacity="0.5"/>
+      <line x1="24.5" y1="11" x2="24.5" y2="25" stroke="#f7f4ef" stroke-width="0.7" opacity="0.5"/>
+
+      <!-- === MOTS SUR LES DOIGTS (écrits en vertical, du bas vers le haut) === -->
+      <!-- Index (gauche) : SOIN -->
+      <text transform="translate(16.5,22) rotate(-90)" text-anchor="middle"
+            font-family="'DM Sans',sans-serif" font-size="4.2" font-weight="700"
+            fill="#7fa89a" letter-spacing="0.5">SOIN</text>
+      <!-- Majeur (centre) : SANTÉ -->
+      <text transform="translate(22,19) rotate(-90)" text-anchor="middle"
+            font-family="'DM Sans',sans-serif" font-size="3.9" font-weight="700"
+            fill="#c8a96e" letter-spacing="0.3">SANTÉ</text>
+      <!-- Annulaire-3e (droite) : VIE -->
+      <text transform="translate(27.5,21) rotate(-90)" text-anchor="middle"
+            font-family="'DM Sans',sans-serif" font-size="4.2" font-weight="700"
+            fill="#7fa89a" letter-spacing="0.5">VIE</text>
+    </svg>
+    Cabinet de Pédiatrie
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#medecins">Médecins</a>
+    <a href="#infos">Horaires</a>
+    <a href="#contact">Contact</a>
+    <a href="#rdv" class="btn-rdv">Prendre RDV</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="rdv">
+  <div class="hero-left">
+    <div class="hero-tag">Cabinet pédiatrique · Genève</div>
+    <h1 class="hero-title">La santé de <em>vos enfants</em>, notre priorité</h1>
+    <p class="hero-desc">Notre équipe de pédiatres expérimentés accompagne votre enfant de la naissance à l'adolescence, avec bienveillance et expertise. Sous la direction du Dr. Manlio Regusci.</p>
+    <div class="hero-actions">
+      <a href="#rdv" class="btn-primary">Prendre rendez-vous</a>
+      <a href="#medecins" class="btn-outline">Nos médecins</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Pédiatres spécialisés</div>
+      </div>
+      <div>
+        <div class="stat-num">+2000</div>
+        <div class="stat-label">Familles suivies</div>
+      </div>
+      <div>
+        <div class="stat-num">15 ans</div>
+        <div class="stat-label">D'expérience</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <h2>Prendre rendez-vous</h2>
+    <p>Remplissez le formulaire, nous vous confirmons sous 24h.</p>
+    <form class="rdv-form" onsubmit="submitRDV(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom du parent</label>
+          <input type="text" placeholder="Dupont" required>
+        </div>
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" placeholder="Marie" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prénom de l'enfant</label>
+          <input type="text" placeholder="Lucas" required>
+        </div>
+        <div class="form-group">
+          <label>Âge de l'enfant</label>
+          <input type="text" placeholder="3 ans" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Médecin souhaité</label>
+        <select required>
+          <option value="">-- Choisir un médecin --</option>
+          <option>Dr. Manlio Regusci (Médecin chef)</option>
+          <option>Dr. Antoine Bernard</option>
+          <option>Dr. Claire Fontaine</option>
+          <option>Dr. Marc Leclerc</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date souhaitée</label>
+          <input type="date" required>
+        </div>
+        <div class="form-group">
+          <label>Motif de consultation</label>
+          <select required>
+            <option value="">-- Motif --</option>
+            <option>Visite de suivi</option>
+            <option>Vaccination</option>
+            <option>Maladie / Fièvre</option>
+            <option>Contrôle annuel</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Téléphone</label>
+        <input type="tel" placeholder="+41 22 000 00 00" required>
+      </div>
+      <div class="form-group">
+        <label>Message (facultatif)</label>
+        <textarea placeholder="Précisions sur le motif de consultation..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Envoyer la demande</button>
+    </form>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">Ce que nous proposons</div>
+  <div class="section-title">Nos services pédiatriques</div>
+  <p class="section-desc">Un suivi complet et personnalisé pour chaque enfant, de la naissance à l'adolescence.</p>
+  <div class="services-grid fade-in">
+    <div class="service-card">
+      <div class="service-icon">🩺</div>
+      <h3>Consultations de suivi</h3>
+      <p>Bilans de santé réguliers, courbes de croissance, développement psychomoteur et conseils parentaux.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💉</div>
+      <h3>Vaccinations</h3>
+      <p>Respect du calendrier vaccinal suisse, rattrapage de vaccins et conseil aux familles voyageant à l'étranger.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌡️</div>
+      <h3>Maladies aiguës</h3>
+      <p>Prise en charge rapide des infections, otites, bronchites, angines et autres affections courantes de l'enfant.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧠</div>
+      <h3>Développement & comportement</h3>
+      <p>Dépistage des troubles du développement, TDAH, dyslexie, et orientation vers les spécialistes adaptés.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🍎</div>
+      <h3>Nutrition & diététique</h3>
+      <p>Conseils sur l'alimentation du nourrisson, diversification, obésité infantile et troubles alimentaires.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👶</div>
+      <h3>Nouveau-nés & nourrissons</h3>
+      <p>Consultations post-natales, allaitement, sommeil du bébé et surveillance des premiers mois de vie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MÉDECINS -->
+<section class="medecins" id="medecins">
+  <div class="section-label">Notre équipe</div>
+  <div class="section-title">Nos médecins</div>
+  <p class="section-desc">Des pédiatres passionnés et expérimentés, dévoués au bien-être de vos enfants.</p>
+  <div class="medecins-grid fade-in">
+    <div class="medecin-card">
+      <div class="medecin-photo">
+        <div class="medecin-avatar">MR</div>
+      </div>
+      <div class="medecin-body">
+        <div class="medecin-name">Dr. Manlio Regusci</div>
+        <div class="medecin-spec">Médecin chef · Pédiatrie générale</div>
+        <p class="medecin-desc">Formé aux HUG de Genève et à l'Université de Lausanne, le Dr. Regusci dirige le cabinet depuis sa fondation. Expert reconnu en pédiatrie préventive et développement du nourrisson.</p>
+        <div class="medecin-dispos">
+          <span class="dispo-tag">Lun – Ven</span>
+          <span class="dispo-tag">8h – 17h</span>
+          <span class="dispo-tag">Français · Italien · Anglais</span>
+        </div>
+      </div>
+    </div>
+    <div class="medecin-card">
+      <div class="medecin-photo" style="background: var(--sage);">
+        <div class="medecin-avatar">AB</div>
+      </div>
+      <div class="medecin-body">
+        <div class="medecin-name">Dr. Antoine Bernard</div>
+        <div class="medecin-spec">Pédiatrie · Allergologie</div>
+        <p class="medecin-desc">Expert en allergies pédiatriques et maladies respiratoires de l'enfant. Le Dr. Bernard est également formé en pédiatrie d'urgence.</p>
+        <div class="medecin-dispos">
+          <span class="dispo-tag">Mar – Sam</span>
+          <span class="dispo-tag">9h – 18h</span>
+          <span class="dispo-tag">Français</span>
+        </div>
+      </div>
+    </div>
+    <div class="medecin-card">
+      <div class="medecin-photo" style="background: #4a6580;">
+        <div class="medecin-avatar">CF</div>
+      </div>
+      <div class="medecin-body">
+        <div class="medecin-name">Dr. Claire Fontaine</div>
+        <div class="medecin-spec">Néonatologie · Nutrition</div>
+        <p class="medecin-desc">Spécialisée dans les premiers mois de vie, l'allaitement et la nutrition infantile. Conseillère certifiée en lactation (IBCLC).</p>
+        <div class="medecin-dispos">
+          <span class="dispo-tag">Lun – Jeu</span>
+          <span class="dispo-tag">8h – 16h</span>
+          <span class="dispo-tag">Français · Espagnol</span>
+        </div>
+      </div>
+    </div>
+    <div class="medecin-card" style="grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; max-width: 600px;">
+      <div class="medecin-photo" style="width: 180px; height: auto; border-radius: 0;">
+        <div class="medecin-avatar">ML</div>
+      </div>
+      <div class="medecin-body">
+        <div class="medecin-name">Dr. Marc Leclerc</div>
+        <div class="medecin-spec">Pédiatrie · Adolescents</div>
+        <p class="medecin-desc">Spécialisé dans le suivi des adolescents, la médecine du sport scolaire et la santé mentale des jeunes. Approche douce et à l'écoute.</p>
+        <div class="medecin-dispos">
+          <span class="dispo-tag">Lun – Ven</span>
+          <span class="dispo-tag">10h – 19h</span>
+          <span class="dispo-tag">Français · Anglais · Arabe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS PRATIQUES -->
+<section class="infos" id="infos">
+  <div class="section-label">Informations pratiques</div>
+  <div class="section-title">Horaires & Contact</div>
+  <p class="section-desc">Le cabinet est ouvert du lundi au samedi. En cas d'urgence, appelez le 144 ou rendez-vous aux urgences pédiatriques.</p>
+  <div class="infos-grid fade-in">
+    <div class="info-block">
+      <h3>Horaires d'ouverture</h3>
+      <div class="info-row"><span class="day">Lundi</span><span class="time">08h00 – 18h00</span></div>
+      <div class="info-row"><span class="day">Mardi</span><span class="time">08h00 – 18h00</span></div>
+      <div class="info-row"><span class="day">Mercredi</span><span class="time">08h00 – 17h00</span></div>
+      <div class="info-row"><span class="day">Jeudi</span><span class="time">08h00 – 18h00</span></div>
+      <div class="info-row"><span class="day">Vendredi</span><span class="time">08h00 – 17h00</span></div>
+      <div class="info-row"><span class="day">Samedi</span><span class="time">09h00 – 12h00</span></div>
+      <div class="info-row"><span class="day">Dimanche</span><span class="closed">Fermé</span></div>
+      <div class="urgence-banner">
+        <div class="urgence-icon">⚠️</div>
+        <div class="urgence-text">
+          <h4>Urgences pédiatriques</h4>
+          <p>En dehors des heures d'ouverture, contactez le 144 ou les urgences des HUG (Hôpital cantonal de Genève).</p>
+        </div>
+      </div>
+    </div>
+    <div class="info-block" id="contact">
+      <h3>Nous contacter</h3>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Adresse</div>
+          <div class="contact-value">12 Rue de Rive, 1204 Genève</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Téléphone</div>
+          <div class="contact-value">+41 22 312 45 67</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">contact@pediatrie-moreau.ch</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Assurances acceptées</div>
+          <div class="contact-value">LAMal · LCA · Toutes caisses</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Délai de réponse RDV</div>
+          <div class="contact-value">Confirmation sous 24h ouvrées</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Cabinet de Pédiatrie · Dr. Regusci & Associés</div>
+  <div class="footer-copy">© 2025 · Genève, Suisse</div>
+  <div class="footer-links">
+    <a href="#">Mentions légales</a>
+    <a href="#">Confidentialité</a>
+    <a href="#">Accessibilité</a>
+  </div>
+</footer>
+
+<!-- MODAL CONFIRMATION -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="formWrapper">
+      <h2>Confirmer votre demande</h2>
+      <p>En cliquant sur confirmer, votre demande sera envoyée à notre équipe qui vous contactera sous 24 heures.</p>
+      <button class="form-submit" style="width:100%;" onclick="confirmRDV()">✓ Confirmer le rendez-vous</button>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div class="check">✓</div>
+      <h3>Demande envoyée !</h3>
+      <p>Notre équipe vous contactera dans les 24 heures pour confirmer votre rendez-vous. Merci de votre confiance.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Animations fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Form
+  function submitRDV(e) {
+    e.preventDefault();
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.getElementById('successMsg').style.display = 'none';
+    document.getElementById('formWrapper').style.display = 'block';
+  }
+
+  function confirmRDV() {
+    document.getElementById('formWrapper').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.rdv-form').reset();
+  }
+
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Set min date for input
+  const dateInput = document.querySelector('input[type="date"]');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+  }
+</script>
+</body>
+</html>
